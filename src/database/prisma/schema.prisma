@@ -5,6 +5,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../client"
 }
 
 model Volume {
@@ -21,7 +22,7 @@ model Folder {
   name         String
   path         String
   size         Int
-  lastModified DateTime
+  lastModified DateTime @default(now())
   favorite     Boolean  @default(false)
 
   files File[]
@@ -36,7 +37,7 @@ model File {
   extension    String
   path         String
   size         Int
-  lastModified DateTime
+  lastModified DateTime @default(now())
   favorite     Boolean  @default(false)
 
   ParentFolder Folder @relation(fields: [folderId], references: [id])

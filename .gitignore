@@ -27,3 +27,10 @@ npm-debug.log.*
 *.css.d.ts
 *.sass.d.ts
 *.scss.d.ts
+
+# User Data
+/src/database/Data.db
+/src/database/Data.db-journal
+
+# Build
+/src/database/client
