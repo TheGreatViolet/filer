@@ -1,0 +1,44 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:../Data.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Volume {
+  id   Int    @id @default(autoincrement())
+  name String
+  size Int
+  type String
+
+  Folders Folder[]
+}
+
+model Folder {
+  id           Int      @id @default(autoincrement())
+  name         String
+  path         String
+  size         Int
+  lastModified DateTime
+  favorite     Boolean  @default(false)
+
+  files File[]
+
+  Volume   Volume @relation(fields: [volumeId], references: [id])
+  volumeId Int
+}
+
+model File {
+  id           Int      @id @default(autoincrement())
+  name         String
+  extension    String
+  path         String
+  size         Int
+  lastModified DateTime
+  favorite     Boolean  @default(false)
+
+  ParentFolder Folder @relation(fields: [folderId], references: [id])
+  folderId     Int
+}
