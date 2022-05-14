@@ -1,7 +1,7 @@
-import { PrismaClient } from "database/client";
+import { PrismaClient } from "../database/client";
 
 export async function createFile(name: string, extension: string,
-  size: number, path: string, parentFolderID: number): Promise<void> {
+  size: number, path: string, parentFolderID: number): Promise<String> {
 
   const client = new PrismaClient();
 
@@ -20,10 +20,12 @@ export async function createFile(name: string, extension: string,
   });
 
   await client.$disconnect();
+
+  return 'success';
 }
 
 export async function createFolder(name: string, path: string, size: number,
-  volumeID: number, fileIDs: number[] = []): Promise<void> {
+  volumeID: number, fileIDs: number[] = []): Promise<String> {
 
   const client = new PrismaClient();
 
@@ -44,4 +46,34 @@ export async function createFolder(name: string, path: string, size: number,
   });
 
   await client.$disconnect();
+
+  return 'success';
+}
+
+export async function createVolume(name: string, size: number, type: string): Promise<String> {
+  const client = new PrismaClient();
+
+  client.volume.create({
+    data: {
+      name,
+      size,
+      type
+    }
+  });
+
+  await client.$disconnect();
+
+  return 'success';
+}
+
+export async function clearDB() {
+  const client = new PrismaClient();
+
+  await client.file.deleteMany({});
+  await client.folder.deleteMany({});
+  await client.volume.deleteMany({});
+
+  await client.$disconnect();
+
+  return 'success';
 }
