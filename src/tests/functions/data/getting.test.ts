@@ -1,26 +1,8 @@
-import { createVolume, createFolder, createFile, clearDB, getVolume, getFolder, getFile } from "../../functions/data/data";
+import { clearDB, getVolume, getFolder, getFile } from "../../../functions/data/getting";
 
 describe("Database functions", () => {
   it("Clears the database", () => {
     clearDB().then((value) => {
-      expect(value).toBe("success");
-    });
-  });
-
-  it("Creates a volume", () => {
-    createVolume("test", 1024, "SSD").then((value) => {
-      expect(value).toBe("success");
-    });
-  });
-
-  it("Creates a folder in the volume", () => {
-    createFolder("test", "/", 1024, 1).then((value) => {
-      expect(value).toBe("success");
-    });
-  });
-
-  it("Creates a file in the folder", () => {
-    createFile("test", "txt", 1024, "/", 1).then((value) => {
       expect(value).toBe("success");
     });
   });
