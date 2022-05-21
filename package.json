@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "start": "tauri dev",
+    "migrate": "npx prisma migrate dev --schema ./prisma/schema.prisma",
+    "start": "npm run migrate && tauri dev",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri"
