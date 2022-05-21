@@ -9,11 +9,10 @@ generator client {
 }
 
 model File {
-  id       Int     @id @default(autoincrement())
-  name     String
-  ext      String
-  size     Int
-  favorite Boolean
+  id   Int    @id @default(autoincrement())
+  name String
+  ext  String
+  size Int
 }
 
 model Folder {

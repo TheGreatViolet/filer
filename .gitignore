@@ -28,5 +28,5 @@ target
 /src-tauri/src/client.rs
 
 # Client data
-/src-tauri/prisma/Data.db
-/src-tauri/prisma/Data.db-journal
+/prisma/Data.db
+/prisma/Data.db-journal
