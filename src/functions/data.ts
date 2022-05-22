@@ -1,9 +1,10 @@
 import { invoke } from '@tauri-apps/api/tauri';
-import { homeDir } from '@tauri-apps/api/path';
+import { homeDir, join } from '@tauri-apps/api/path';
 
 export async function toAbsolutePath(path: string) {
   if (path.startsWith('~/')) {
-    return path.replace('~', await homeDir());
+    const split = path.split(/~(?=\/)/);
+    return await join(await homeDir(), split[1]);
   } else {
     return path;
   }
