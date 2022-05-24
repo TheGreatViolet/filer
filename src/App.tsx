@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Headbar from "./components/Headbar";
 import Sidebar from "./components/Sidebar";
 import { getFavFolders } from "./functions/data";
 
 const App = () => {
+  const [activeWindow, setActiveWindow] = useState(<></>);
+
   useEffect(() => {
     getFavFolders().then(console.log);
   }, []);
@@ -14,7 +16,11 @@ const App = () => {
         <Headbar />
 
         <div className="flex flex-row h-full w-screen">
-          <Sidebar />
+          <Sidebar activeWindowState={setActiveWindow}/>
+
+          <div className="flex-grow">
+            {activeWindow}
+          </div>
         </div>
       </div>
     </>

@@ -30,3 +30,4 @@ target
 # Client data
 /prisma/Data.db
 /prisma/Data.db-journal
+/src-tauri/Data.db

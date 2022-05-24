@@ -9,9 +9,35 @@ interface FileListProps {
 }
 
 const ActualFileList = (props: FileListProps) => {
+  const [fileList, setFileList] = useState<FileEntry[]>([]);
+
+  const refreshFileList = () => {
+    getItemsInFolder(props.folderPath).then((files) => {
+      console.log(files);
+      
+      setFileList(files);
+    });
+  }
+
+  useEffect(() => {
+    refreshFileList();
+  }, []);
+
   return (
     <>
-      <h1>Placeholder</h1>
+      <div className="flex flex-col border-2 border-zinc-900">
+        {fileList.map((file) => {
+          return (
+            <>
+              <div className="flex flex-row p-0.5 border-2 border-zinc-500">
+                <p className="ml-1 text-zinc-200">{file.name}</p>
+              </div>
+
+              <div className="w-fit"/>
+            </>
+          )
+        })}
+      </div>
     </>
   )
 }

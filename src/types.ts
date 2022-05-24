@@ -1,4 +1,4 @@
 export type Favorite = {
-  name: String,
-  path: String,
+  name: string,
+  path: string,
 }
