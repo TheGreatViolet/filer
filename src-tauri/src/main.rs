@@ -8,7 +8,8 @@ fn main() {
     .invoke_handler(tauri::generate_handler![
       get_favorite_folders,
       index_folder,
-      set_folder_fav
+      set_folder_fav,
+      open_file
     ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
@@ -93,4 +94,11 @@ async fn set_folder_fav(folder_name: String, path: String, fav: bool) -> () {
         .await;
     }
   }
+}
+
+use opener::open;
+
+#[tauri::command]
+async fn open_file(file_path: String) {
+  open(file_path).expect("Failed to open file");
 }

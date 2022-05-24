@@ -1,6 +1,6 @@
 import { FileEntry } from "@tauri-apps/api/fs";
 import { useEffect, useState } from "react";
-import { getItemsInFolder } from "../../functions/files";
+import { getItemsInFolder, openFile } from "../../functions/files";
 import NoFiles from "./NoFiles";
 
 interface FileListProps {
@@ -29,11 +29,12 @@ const ActualFileList = (props: FileListProps) => {
         {fileList.map((file) => {
           return (
             <>
-              <div className="flex flex-row p-0.5 border-2 border-zinc-500">
-                <p className="ml-1 text-zinc-200">{file.name}</p>
+              <div className="w-full flex flex-row p-0.5 border-2 border-zinc-500">
+                <button className="ml-1 text-zinc-200"
+                onClick={() => {
+                  openFile(file.path);
+                }}>{file.name}</button>
               </div>
-
-              <div className="w-fit"/>
             </>
           )
         })}

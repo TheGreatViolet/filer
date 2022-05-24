@@ -77,6 +77,7 @@ checksum = "08f9b8508dccb7687a1d6c4ce66b2b0ecef467c94667de27d8d7fe1f8d2a9cdc"
 name = "app"
 version = "0.1.0"
 dependencies = [
+ "opener",
  "prisma-client-rust",
  "serde",
  "serde_json",
@@ -351,7 +352,9 @@ version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ba3569f383e8f1598449f1a423e72e99569137b47740b1da11ef19af3d5c3223"
 dependencies = [
+ "lazy_static",
  "memchr",
+ "regex-automata",
 ]
 
 [[package]]
@@ -2934,6 +2937,16 @@ name = "opaque-debug"
 version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2839e79665f131bdb5782e51f2c6c9599c133c6098982a54c794358bf432529c"
+
+[[package]]
+name = "opener"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4ea3ebcd72a54701f56345f16785a6d3ac2df7e986d273eb4395c0b01db17952"
+dependencies = [
+ "bstr",
+ "winapi",
+]
 
 [[package]]
 name = "openssl"
