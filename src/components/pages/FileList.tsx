@@ -1,11 +1,12 @@
 import { FileEntry } from "@tauri-apps/api/fs";
 import { useEffect, useState } from "react";
-import { getItemsInFolder, openFile } from "../../functions/files";
+import { getItemsInFolder, isDir, openFile } from "../../functions/files";
 import NoFiles from "./NoFiles";
 
 interface FileListProps {
   folderPath: string,
   folderName: string,
+  activeState: Function
 }
 
 const ActualFileList = (props: FileListProps) => {
@@ -13,8 +14,6 @@ const ActualFileList = (props: FileListProps) => {
 
   const refreshFileList = () => {
     getItemsInFolder(props.folderPath).then((files) => {
-      console.log(files);
-      
       setFileList(files);
     });
   }
@@ -31,7 +30,13 @@ const ActualFileList = (props: FileListProps) => {
             <>
               <div className="w-full flex flex-row p-0.5 border-2 border-zinc-500">
                 <button className="ml-1 text-zinc-200"
-                onClick={() => {
+                onDoubleClick={async () => {
+                  if (await isDir(file.path)) {
+                    props.activeState(<ActualFileList folderPath={file.path}
+                      folderName={file.name !== undefined ? file.name : 'Err'}
+                      activeState={props.activeState}/>);
+                    return;
+                  }
                   openFile(file.path);
                 }}>{file.name}</button>
               </div>
@@ -58,9 +63,9 @@ const FileList = (props: FileListProps) => {
 
   return (
     <>
-      {fileList.length === 0 ? 
+      {fileList.length === 0 ?
       <NoFiles /> :
-      <ActualFileList folderPath={props.folderPath} folderName={props.folderName}/>}
+      <ActualFileList folderPath={props.folderPath} folderName={props.folderName} activeState={props.activeState}/>}
     </>
   )
 }

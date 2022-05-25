@@ -32,7 +32,7 @@ const Sidebar = (props: SidebarProps) => {
           return (
             <button className="bg-zinc-700 rounded-md" onClick={() => {
               setActiveWindow(<>
-                <FileList folderName={folder.name} folderPath={folder.path}/>
+                <FileList folderName={folder.name} folderPath={folder.path} activeState={props.activeWindowState}/>
               </>);
             }}>{folder.name}</button>
           );
