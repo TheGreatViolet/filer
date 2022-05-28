@@ -12,15 +12,24 @@ interface FileListProps {
 const ActualFileList = (props: FileListProps) => {
   const [fileList, setFileList] = useState<FileEntry[]>([]);
 
-  const refreshFileList = () => {
-    getItemsInFolder(props.folderPath).then((files) => {
+  const refreshFileList = (path: string) => {
+    getItemsInFolder(path).then((files) => {
       setFileList(files);
     });
   }
 
   useEffect(() => {
-    refreshFileList();
+    refreshFileList(props.folderPath);
   }, []);
+
+  useEffect(() => {
+    console.log("doing");
+    refreshFileList(props.folderPath);
+  }, [props.folderPath]);
+
+  const setActiveWindow = (folder: FileEntry) => {
+    props.activeState(folder);
+  }
 
   return (
     <>
@@ -32,9 +41,11 @@ const ActualFileList = (props: FileListProps) => {
                 <button className="ml-1 text-zinc-200"
                 onDoubleClick={async () => {
                   if (await isDir(file.path)) {
-                    props.activeState(<ActualFileList folderPath={file.path}
-                      folderName={file.name !== undefined ? file.name : 'Err'}
-                      activeState={props.activeState}/>);
+                    setActiveWindow({
+                      name: file.name,
+                      path: file.path
+                    })
+
                     return;
                   }
                   openFile(file.path);

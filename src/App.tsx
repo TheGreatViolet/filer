@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import Headbar from "./components/Headbar";
 import Sidebar from "./components/Sidebar";
+import FileList from './components/pages/FileList';
 import { getFavFolders } from "./functions/data";
+import { FileEntry } from "@tauri-apps/api/fs";
 
 const App = () => {
-  const [activeWindow, setActiveWindow] = useState(<></>);
+  const [folder, setFolder] = useState<FileEntry>({name: "Documents", path: "~/Documents"});
 
   useEffect(() => {
     getFavFolders().then(console.log);
   }, []);
+
+  useEffect(() => {
+    console.log(folder);
+  }, [folder]);
 
   return (
     <>
@@ -16,10 +22,13 @@ const App = () => {
         <Headbar />
 
         <div className="flex flex-row h-full w-screen">
-          <Sidebar activeWindowState={setActiveWindow}/>
+          <Sidebar setFolder={setFolder}/>
 
           <div className="flex-grow">
-            {activeWindow}
+            <FileList
+              folderName={folder.name || ""}
+              folderPath={folder.path}
+              activeState={setFolder}/>
           </div>
         </div>
       </div>

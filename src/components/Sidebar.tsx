@@ -4,7 +4,7 @@ import { Favorite } from "../types";
 import FileList from "./pages/FileList";
 
 interface SidebarProps {
-  activeWindowState: Function
+  setFolder: Function
 }
 
 const Sidebar = (props: SidebarProps) => {
@@ -12,12 +12,9 @@ const Sidebar = (props: SidebarProps) => {
 
   useEffect(() => {
     // Placeholder for favorites
-    setFavorites([{ name: "Documents", path: "~/Documents" }]);
+    setFavorites([{ name: "Documents", path: "~/Documents" },
+    { name: "Downloads", path: "~/Downloads" }]);
   }, []);
-
-  const setActiveWindow = (window: JSX.Element) => {
-    props.activeWindowState(window);
-  }
 
   return (
     <div className="border-r-2 border-zinc-800 flex flex-col h-full w-1/6 p-4">
@@ -31,9 +28,7 @@ const Sidebar = (props: SidebarProps) => {
         {favorites.map((folder) => {
           return (
             <button className="bg-zinc-700 rounded-md" onClick={() => {
-              setActiveWindow(<>
-                <FileList folderName={folder.name} folderPath={folder.path} activeState={props.activeWindowState}/>
-              </>);
+              props.setFolder({ name: folder.name, path: folder.path });
             }}>{folder.name}</button>
           );
         })}
