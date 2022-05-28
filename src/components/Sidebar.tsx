@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { getFavFolders } from "../functions/data";
+import { useEffect, useState } from "react";
 import { Favorite } from "../types";
-import FileList from "./pages/FileList";
 
 interface SidebarProps {
   setFolder: Function
@@ -12,6 +10,7 @@ const Sidebar = (props: SidebarProps) => {
 
   useEffect(() => {
     // Placeholder for favorites
+    
     setFavorites([{ name: "Documents", path: "~/Documents" },
     { name: "Downloads", path: "~/Downloads" }]);
   }, []);

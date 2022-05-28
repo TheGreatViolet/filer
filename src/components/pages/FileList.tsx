@@ -23,7 +23,6 @@ const ActualFileList = (props: FileListProps) => {
   }, []);
 
   useEffect(() => {
-    console.log("doing");
     refreshFileList(props.folderPath);
   }, [props.folderPath]);
 

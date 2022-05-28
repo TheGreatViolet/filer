@@ -8,14 +8,6 @@ import { FileEntry } from "@tauri-apps/api/fs";
 const App = () => {
   const [folder, setFolder] = useState<FileEntry>({name: "Documents", path: "~/Documents"});
 
-  useEffect(() => {
-    getFavFolders().then(console.log);
-  }, []);
-
-  useEffect(() => {
-    console.log(folder);
-  }, [folder]);
-
   return (
     <>
       <div className='flex flex-col bg-zinc-900 w-screen h-screen'>
