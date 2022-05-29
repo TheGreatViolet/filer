@@ -14,10 +14,8 @@ export const getFavFolders = async (): Promise<string[]> => {
   return invoke("get_favorite_folders");
 }
 
-export async function indexFolder(name: string, path: string, fav: boolean = false): Promise<void> {
-  return invoke("index_folder", { folderName: name, fav: fav, path: await toAbsolutePath(path) });
-}
-
-export async function updateFav(name: string, path: string, fav: boolean): Promise<void> {
-  return invoke("set_folder_fav", { folderName: name, fav: fav, path: await toAbsolutePath(path) });
+export async function addFolder(name: string, path: string, fav: boolean = false): Promise<void> {
+  invoke("add_folder", { folderName: name, fav: fav, path: await toAbsolutePath(path) }).then(() => {
+    return;
+  });
 }
