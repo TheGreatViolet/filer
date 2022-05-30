@@ -47,7 +47,8 @@ const Sidebar = (props: SidebarProps) => {
         <div className="flex flex-row">
           <p className="text-lg text-zinc-200">Quick Access</p>
 
-          <div className="w-12"/>
+          <div className="grow"/>
+
           <button className="mt-2 ml-1" onClick={() => {
             setIsOpen(true);
           }}>
