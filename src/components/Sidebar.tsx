@@ -66,7 +66,7 @@ const Sidebar = (props: SidebarProps) => {
         <div className="pl-2 flex flex-col space-y-2">
           {favorites.map((folder) => {
             return (
-              <button className="bg-zinc-700 rounded-md" onClick={() => {
+              <button className="btn-main" onClick={() => {
                 props.setFolder({ name: folder.name, path: folder.path });
               }}>{folder.name}</button>
             );

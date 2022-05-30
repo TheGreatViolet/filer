@@ -36,8 +36,9 @@ const ActualFileList = (props: FileListProps) => {
         {fileList.map((file) => {
           return (
             <>
-              <div className="w-full flex flex-row p-0.5 border-2 border-zinc-500">
-                <button className="ml-1 text-zinc-200"
+              <div className="file-item">
+                <button className="pl-1 flex-1 text-left text-zinc-200
+                focus:bg-zinc-700 motion-safe:ease-in-out motion-safe:duration-150"
                 onDoubleClick={async () => {
                   if (await isDir(file.path)) {
                     setActiveWindow({

@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn-main {
+    @apply bg-zinc-800 text-zinc-200 rounded-md px-4 py-1
+    motion-safe:ease-in-out motion-safe:duration-150;
+  } .btn-main:hover {
+    @apply bg-zinc-700;
+  }
+
+  .file-item {
+    @apply w-full flex flex-row m-1 mr-2 border-2 border-zinc-600
+    border-solid border-opacity-50 rounded-md;
+  }
+}

@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Headbar from "./components/Headbar";
 import Sidebar from "./components/Sidebar";
 import FileList from './components/pages/FileList';
-import { getFavFolders } from "./functions/data";
 import { FileEntry } from "@tauri-apps/api/fs";
 
 const App = () => {
