@@ -10,17 +10,19 @@ const App = () => {
 
   return (
     <>
-      <div className='flex flex-col bg-zinc-900 w-screen h-screen'>
+      <div className='flex flex-col bg-zinc-900 w-screen h-screen overflow-hidden'>
         <Headbar />
 
         <div className="flex flex-row h-full w-screen">
           <Sidebar setFolder={setFolder}/>
 
-          <div className="flex-grow">
-            <FileList
-              folderName={folder.name || ""}
-              folderPath={folder.path}
-              activeState={setFolder}/>
+          <div className="flex-1 flex overflow-hidden">
+            <div className="flex-1 overflow-y-scroll">
+              <FileList
+                folderName={folder.name || ""}
+                folderPath={folder.path}
+                activeState={setFolder}/>
+            </div>
           </div>
         </div>
       </div>
