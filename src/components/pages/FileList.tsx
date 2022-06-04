@@ -1,5 +1,5 @@
 import { FileEntry } from "@tauri-apps/api/fs";
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { getItemsInFolder, isDir, openFile } from "../../functions/files";
 import NoFiles from "./NoFiles";
 
@@ -11,6 +11,21 @@ interface FileListProps {
 
 const ActualFileList = (props: FileListProps) => {
   const [fileList, setFileList] = useState<FileEntry[]>([]);
+
+  const [contextMenuActive, setContextMenuActive] = useState(false);
+  const [contextMenuLoc, setContextMenuLoc] = useState({x: 0, y: 0});
+
+  const handleContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+
+    const adjustedLoc = {
+      x: event.clientX,
+      y: event.clientY
+    }
+
+    setContextMenuActive(true);
+    setContextMenuLoc(adjustedLoc);
+  }
 
   const refreshFileList = (path: string) => {
     getItemsInFolder(path).then((files) => {
@@ -32,7 +47,20 @@ const ActualFileList = (props: FileListProps) => {
 
   return (
     <>
-      <div className="flex flex-col border-2 border-zinc-900">
+      <div className={`absolute w-20 bg-zinc-100 h-10 z-10`}
+        style={{
+          position: "absolute",
+          top: contextMenuLoc.y,
+          left: contextMenuLoc.x,
+          visibility: contextMenuActive ? "visible" : "hidden"
+        }}>
+          <p>placeholder</p>
+      </div>
+
+      <div className="flex flex-col border-2 border-zinc-900 h-full z-0"
+        onContextMenu={handleContextMenu} onClick={() => {
+          setContextMenuActive(false);
+        }}>
         {fileList.map((file) => {
           return (
             <>
