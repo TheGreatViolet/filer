@@ -47,14 +47,16 @@ const ActualFileList = (props: FileListProps) => {
 
   return (
     <>
-      <div className={`absolute w-20 bg-zinc-100 h-10 z-10`}
+      <div className='absolute bg-zinc-800 z-10
+        rounded-md p-2
+        motion-safe:ease-in-out duration-75'
         style={{
           position: "absolute",
           top: contextMenuLoc.y,
           left: contextMenuLoc.x,
-          visibility: contextMenuActive ? "visible" : "hidden"
+          opacity: contextMenuActive ? 1 : 0
         }}>
-          <p>placeholder</p>
+          <p>Placeholder</p>
       </div>
 
       <div className="flex flex-col border-2 border-zinc-900 h-full z-0"
