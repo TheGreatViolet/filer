@@ -1,7 +1,11 @@
 {
   "name": "filer",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "author": {
+    "name": "Violet Hayes",
+    "email": "ampc11234@gmail.com"
+  },
   "scripts": {
     "dev": "vite",
     "migrate": "npx prisma migrate dev --schema ./prisma/schema.prisma",
