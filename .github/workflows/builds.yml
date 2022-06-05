@@ -98,7 +98,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: "Publish"
-        uses: actions/release-action@v1
+        uses: ncipollo/release-action@v1
         with:
           artifacts: "target/release/bundle/appimage/*.AppImage,target/release/bundle/deb/*.deb"
           prerelease: true
