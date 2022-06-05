@@ -1,11 +1,11 @@
 [package]
-name = "app"
+name = "filer"
 version = "0.1.0"
 description = "A Tauri App"
 authors = ["Violet Hayes <ampc11234@gmail.com>"]
-license = ""
+license = "MIT"
 repository = ""
-default-run = "app"
+default-run = "filer"
 edition = "2021"
 rust-version = "1.57"
 
