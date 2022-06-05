@@ -13,6 +13,7 @@ on:
 
 jobs:
   release:
+    permissions: write-all
     strategy:
       matrix:
         platform: ['ubuntu-latest', 'windows-latest', 'macos-latest']
