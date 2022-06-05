@@ -60,4 +60,4 @@ jobs:
           tagName: v__VERSION__
           releaseName: 'v__VERSION__'
           prerelease: false
-          releaseDraft: true
+          releaseDraft: false
