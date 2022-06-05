@@ -1,6 +1,6 @@
 [package]
 name = "filer"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Tauri App"
 authors = ["Violet Hayes <ampc11234@gmail.com>"]
 license = "MIT"
