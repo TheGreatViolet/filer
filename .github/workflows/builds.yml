@@ -71,6 +71,9 @@ jobs:
     name: "Publish"
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
+    needs:
+      - build
+      - typecheck
 
     steps:
       - name: "Checkout"
@@ -80,3 +83,22 @@ jobs:
         uses: actions/release-action@v1
         with:
           artifacts: "target/release/bundle/appimage/*.AppImage,target/release/bundle/deb/*.deb"
+          prerelease: false
+
+  publish-prerelease:
+    name: "Publish Prerelease"
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/pr')
+    needs:
+      - build
+      - typecheck
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: "Publish"
+        uses: actions/release-action@v1
+        with:
+          artifacts: "target/release/bundle/appimage/*.AppImage,target/release/bundle/deb/*.deb"
+          prerelease: true
