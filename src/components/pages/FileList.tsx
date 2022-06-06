@@ -74,7 +74,7 @@ const ActualFileList = (props: FileListProps) => {
   return (
     <>
       <div className='absolute bg-zinc-800 z-10
-        rounded-md p-1 w-80
+        rounded-md w-80
         motion-safe:ease-in-out duration-75'
         style={{
           position: "absolute",

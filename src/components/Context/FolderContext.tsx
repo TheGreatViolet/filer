@@ -5,6 +5,8 @@ const FolderContext = () => {
         <button className="flex-1 text-left text-zinc-200">
           test
         </button>
+
+        <div className="divider"/>
       </div>
     </>
   )

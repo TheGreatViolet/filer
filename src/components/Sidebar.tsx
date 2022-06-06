@@ -60,7 +60,7 @@ const Sidebar = (props: SidebarProps) => {
         </div>
 
         <div className="relative flex py-2 items-center">
-          <div className="flex-grow border-t border-zinc-400"></div>
+          <div className="divider"></div>
         </div>
 
         <div className="pl-2 flex flex-col space-y-2">
