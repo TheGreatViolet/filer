@@ -1,6 +1,7 @@
 import { FileEntry } from "@tauri-apps/api/fs";
 import React, { useEffect, useRef, useState } from "react";
 import { getItemsInFolder, isDir, openFile } from "../../functions/files";
+import FolderContext from "../Context/FolderContext";
 import NoFiles from "./NoFiles";
 
 interface FileListProps {
@@ -9,13 +10,19 @@ interface FileListProps {
   activeState: Function
 }
 
+enum ContextMenuType {
+  File,
+  Folder
+}
+
 const ActualFileList = (props: FileListProps) => {
   const [fileList, setFileList] = useState<FileEntry[]>([]);
 
   const [contextMenuActive, setContextMenuActive] = useState(false);
   const [contextMenuLoc, setContextMenuLoc] = useState({x: 0, y: 0});
+  const [contextMenuType, setContextMenuType] = useState<ContextMenuType>(ContextMenuType.File);
 
-  const handleContextMenu = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleContextMenu = (event: React.MouseEvent<HTMLDivElement>, type: ContextMenuType) => {
     event.preventDefault();
 
     const adjustedLoc = {
@@ -25,6 +32,7 @@ const ActualFileList = (props: FileListProps) => {
 
     setContextMenuActive(true);
     setContextMenuLoc(adjustedLoc);
+    setContextMenuType(type);
   }
 
   const refreshFileList = (path: string) => {
@@ -45,10 +53,28 @@ const ActualFileList = (props: FileListProps) => {
     props.activeState(folder);
   }
 
+  const contextSwitch = (type: ContextMenuType): React.ReactNode => {
+    switch (type) {
+      case ContextMenuType.File:
+        return (
+          <>
+
+          </>
+        )
+
+      case ContextMenuType.Folder:
+        console.log("folder");
+        
+        return (
+          <FolderContext />
+        )
+    }
+  }
+
   return (
     <>
       <div className='absolute bg-zinc-800 z-10
-        rounded-md p-2
+        rounded-md p-1 w-80
         motion-safe:ease-in-out duration-75'
         style={{
           position: "absolute",
@@ -56,11 +82,13 @@ const ActualFileList = (props: FileListProps) => {
           left: contextMenuLoc.x,
           opacity: contextMenuActive ? 1 : 0
         }}>
-          <p>Placeholder</p>
+          {contextSwitch(contextMenuType)}
       </div>
 
       <div className="flex flex-col border-2 border-zinc-900 h-full z-0"
-        onContextMenu={handleContextMenu} onClick={() => {
+        onContextMenu={(e) => {
+          handleContextMenu(e, ContextMenuType.Folder);
+        }} onClick={() => {
           setContextMenuActive(false);
         }}>
         {fileList.map((file) => {
